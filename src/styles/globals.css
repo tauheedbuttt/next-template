@@ -1,0 +1,70 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato&family=Poppins&family=Roboto:ital@1&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.slick-slide>div {
+    margin: 0 10px;
+    padding: 20px;
+    margin: auto;
+}
+
+.slick-prev:before,
+.slick-next:before {
+
+    color: #52B788;
+}
+
+.slick-dots li button:before {
+    color: #10002B !important
+}
+
+* {
+    font-family: "Poppins", sans-serif;
+    -webkit-tap-highlight-color: transparent;
+}
+
+@layer base {
+
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+}
+
+@layer components {
+
+    body {
+        @apply bg-accent
+    }
+
+    .list-item {
+        @apply mb-5 transition duration-300 hover:translate-x-2 hidden;
+    }
+
+    .list-item a {
+        @apply flex;
+    }
+
+    .formError {
+        @apply text-red-500 text-[12px];
+    }
+
+    .formInput {
+        @apply border-none outline-none w-full bg-transparent text-[12px] py-1;
+    }
+
+    .inputContainer {
+        @apply flex flex-col items-start border mb-4 py-1.5 px-3 rounded-[3px];
+    }
+
+    .icons {
+        @apply text-accent text-[20px] mr-[18px] min-w-max;
+    }
+}
+
+input::-ms-reveal,
+input::-ms-clear {
+    display: none;
+}

@@ -44,5 +44,6 @@ export default () => {
     queryToObject,
     objToQuery,
     setQuery,
+    href,
   };
 };

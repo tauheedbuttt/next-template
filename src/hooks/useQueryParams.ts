@@ -1,7 +1,7 @@
 import { formDataToObj, objectToFormData } from "@/utils/formdata";
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
 
-export default () => {
+const useQueryParams = () => {
   const router = useRouter();
   const pathname = usePathname();
   const queryToObject = (str: string) => {
@@ -47,3 +47,5 @@ export default () => {
     href,
   };
 };
+
+export default useQueryParams;

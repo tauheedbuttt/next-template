@@ -6,10 +6,11 @@ import Options, { OptionItemProps } from "./options/Options";
 import Filter from "./filter/Filter";
 import Button from "../button/Button";
 import Chips from "./chips/Chips";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import Body, { DataProps } from "./body/Body";
 import { InputProps } from "../form/field/Field";
 import Headers, { HeaderProps } from "./headers";
+import Loader from "../loader/Loader";
 
 export interface ActionProps {
   variant: string;
@@ -64,53 +65,56 @@ const Table = ({
     ...(headers ? headers : []).map((item) => `sort[${item.field}]`),
   ];
   return (
-    <div
-      className={`bg-white  relative shadow-md sm:rounded-lg overflow-hidden ${className}`}
-    >
-      {/* Header */}
-      {isHeader && (
-        <div className="flex flex-row items-center justify-between gap-2 md:space-y-0 p-4">
-          {!noSearch && <Search isLoading={isLoading} />}
+    <Suspense fallback={<Loader />}>
+      <div
+        className={`bg-white  relative shadow-md sm:rounded-lg overflow-hidden ${className}`}
+      >
+        {/* Header */}
+        {isHeader && (
+          <div className="flex flex-row items-center justify-between gap-2 md:space-y-0 p-4">
+            {!noSearch && <Search isLoading={isLoading} />}
 
-          {actions && actions?.length > 0 && (
-            <div className="flex gap-2">
-              {actions?.map((item, index) => (
-                <Button
-                  key={index}
-                  variant={item.variant}
-                  onClick={item.onClick}
-                  isLoading={item.isLoading}
-                >
-                  {item.children}
-                </Button>
-              ))}
-            </div>
-          )}
+            {actions && actions?.length > 0 && (
+              <div className="flex gap-2">
+                {actions?.map((item, index) => (
+                  <Button
+                    key={index}
+                    variant={item.variant}
+                    onClick={item.onClick}
+                    isLoading={item.isLoading}
+                  >
+                    {item.children}
+                  </Button>
+                ))}
+              </div>
+            )}
 
-          <Filter open={open} setOpen={setOpen} filters={filters} />
-          <Options options={options} />
+            <Filter open={open} setOpen={setOpen} filters={filters} />
+            <Options options={options} />
+          </div>
+        )}
+        {showChips && (
+          <Chips include={include} exclude={exclude} setOpen={setOpen} />
+        )}
+
+        {/* Data */}
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm text-left text-gray-500">
+            <Headers headers={headers} />
+            <Body
+              body={body}
+              isFetching={isFetching}
+              columns={headers?.length}
+              data={data}
+            >
+              {children}
+            </Body>
+          </table>
         </div>
-      )}
-      {showChips && (
-        <Chips include={include} exclude={exclude} setOpen={setOpen} />
-      )}
 
-      {/* Data */}
-      <div className="overflow-x-auto">
-        <table className="w-full text-sm text-left text-gray-500">
-          <Headers headers={headers} />
-          <Body
-            body={body}
-            isFetching={isFetching}
-            columns={headers?.length}
-            data={data}
-            children={children}
-          />
-        </table>
+        <Footer total={data?.total} pages={data?.pages} />
       </div>
-
-      <Footer total={data?.total} pages={data?.pages} />
-    </div>
+    </Suspense>
   );
 };
 

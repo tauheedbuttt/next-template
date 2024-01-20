@@ -1,3 +1,5 @@
+'use client'
+
 import useQueryParams from "../../../hooks/useQueryParams";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa";
 

@@ -17,7 +17,7 @@ const Body = ({
   isFetching?: boolean;
   columns?: number;
   data?: DataProps;
-  children?: any;
+  children?: JSX.Element | JSX.Element[];
 }) => {
   return (
     <tbody className={body}>

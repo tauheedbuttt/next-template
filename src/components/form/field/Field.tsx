@@ -1,3 +1,4 @@
+import Image from "next/image";
 import {
   FieldErrors,
   FieldValues,
@@ -136,7 +137,7 @@ const Field = ({
                       key={index}
                       className="relative border-[2px] mb-3 shadow-md border-gray-300 p-1"
                     >
-                      <img
+                      <Image
                         key={index}
                         src={
                           file instanceof File
@@ -163,7 +164,7 @@ const Field = ({
               <div className="flex justify-center w-full">
                 {!multiple && files?.length ? (
                   /\.(jpg|jpeg|png|gif)$/i.test(files[0] as any) ? (
-                    <img
+                    <Image
                       src={
                         files[0] instanceof File
                           ? URL.createObjectURL(files[0])

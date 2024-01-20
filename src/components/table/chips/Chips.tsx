@@ -1,3 +1,4 @@
+'use client'
 import { FaTimes } from "react-icons/fa";
 import useQueryParams from "../../../hooks/useQueryParams";
 

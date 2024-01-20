@@ -1,6 +1,6 @@
 import * as XLSX from "xlsx";
 
-export default () => {
+const useExcel = () => {
   const generateWorkbook = (data: any) => {
     const workbook = XLSX.utils.book_new();
 
@@ -75,3 +75,5 @@ export default () => {
     dataToExcel,
   };
 };
+
+export default useExcel;

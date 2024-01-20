@@ -5,6 +5,7 @@ import { InputProps } from "@/components/form/field/Field"
 import { setAuthToken } from "@/redux/features/authSlice"
 import { useSignInMutation } from "@/redux/services/authApi"
 import { alert } from "@/utils/alert"
+import { loginValidation } from "@/validations/auth"
 import { useRouter } from "next/navigation"
 import { useDispatch } from "react-redux"
 
@@ -21,6 +22,7 @@ const Login = () => {
         {
             label: "Password",
             name: "password",
+            type: "password"
         },
     ]
 
@@ -30,7 +32,7 @@ const Login = () => {
             .then((response) => {
                 alert("Signin Successfully");
                 dispatch(setAuthToken(response?.data?.token));
-                router.push("/");
+                router.push("/dashboard");
             })
             .catch((error: any) => {
                 alert(error?.data?.message, "error");
@@ -45,6 +47,8 @@ const Login = () => {
                     fields={fields}
                     onSubmit={onSubmit}
                     isLoading={isLoading}
+                    submit={"Login"}
+                    validation={loginValidation}
                 />
             </div>
         </main>

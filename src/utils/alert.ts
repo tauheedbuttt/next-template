@@ -1,9 +1,12 @@
 import Swal from "sweetalert2";
 import { Id, toast } from "react-toastify";
 
-let toastId:Id = '';
+let toastId: Id = "";
 
-export const alert = (message: string = "An error occured", type: 'success' | 'warning' | 'error' = "error") => {
+export const alert = (
+  message: string = "An error occured",
+  type: "success" | "warning" | "error" = "success"
+) => {
   if (!toast.isActive(toastId)) toastId = toast(message, { type });
 };
 
